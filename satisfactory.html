@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шутки</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+    <h1 class="mt-5">Добавить шутку</h1>
+    <!-- Кнопка возврата на страницу dashboard -->
+    <a href="{{ url_for('dashboard') }}" class="btn btn-secondary mb-3">Вернуться на Dashboard</a>
+    <form method="POST" action="{{ url_for('satisfactory') }}">
+        <div class="form-group">
+            <textarea name="joke" class="form-control" rows="3" placeholder="Введите вашу шутку..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Добавить шутку</button>
+    </form>
+
+    <h2 class="mt-5">Список шуток</h2>
+    <ul class="list-group">
+        {% for joke in jokes %}
+            <li class="list-group-item">
+                {{ joke.joke }}
+                <form method="POST" action="{{ url_for('delete_joke', joke_id=joke.id) }}" style="display:inline;">
+                    <button type="submit" class="btn btn-danger btn-sm float-right">Удалить</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.11/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
